@@ -20,7 +20,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: affectedTodoAdapter
+    private lateinit var adapter: TodoAdapter
     private lateinit var sharedPref: SharedPreferences
     private lateinit var fab: FloatingActionButton
 
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     // Прогрессирующие задачи (ID >= 1000)
     private val PROGRESSIVE_ID_START = 1000
 
-    private var currentTodos: MutableList<TodoItem> = mutableListOf()
+    private val currentTodos = mutableListOf<TodoItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,36 +55,36 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { showAddTaskDialog() }
 
-        // Адаптер
+        // Адаптер — передаём только TodoItem
         adapter = TodoAdapter(
             currentTodos,
-            { todo, pos -> toggleTodo(todo, pos) },
-            { todo, pos -> showEditOrDeleteDialog(todo, pos) }
+            onToggle = { todo -> toggleTodo(todo) },
+            onLongClick = { todo -> showEditOrDeleteDialog(todo) }
         )
         recyclerView.adapter = adapter
 
-        // loadTodos() перенесён в onResume()
+        // loadTodos() только в onResume()
     }
 
     override fun onResume() {
         super.onResume()
-        loadTodos() // КАЖДЫЙ РАЗ ПРИ ОТКРЫТИИ — ГАРАНТИРОВАННАЯ ИНКРЕМЕНТАЦИЯ
+        loadTodos() // ГАРАНТИРОВАННОЕ ОБНОВЛЕНИЕ ПРИ ОТКРЫТИИ
     }
 
     private fun loadTodos() {
         val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-        val lastResetDate: String = sharedPref.getString("last_reset_date", "") ?: ""
-        var startDate: String = sharedPref.getString("start_date", "") ?: ""
+        val lastResetDate = sharedPref.getString("last_reset_date", "") ?: ""
+        var startDate = sharedPref.getString("start_date", "") ?: ""
 
         if (startDate.isEmpty()) {
             startDate = today
             sharedPref.edit().putString("start_date", today).apply()
         }
 
-        val taskIdsSet: Set<String> = sharedPref.getStringSet(
-            "task_ids",
-            setOf("1", "2", "3", "4", "5", SPECIAL_RUN_ID.toString(), SPECIAL_WORKOUT_ID.toString())
-        ) ?: setOf("1", "2", "3", "4", "5", SPECIAL_RUN_ID.toString(), SPECIAL_WORKOUT_ID.toString())
+        val taskIdsSet = sharedPref.getStringSet("task_ids", setOf(
+            "1", "2", "3", "4", "5",
+            SPECIAL_RUN_ID.toString(), SPECIAL_WORKOUT_ID.toString()
+        )) ?: emptySet()
 
         currentTodos.clear()
 
@@ -96,14 +96,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // === ОБЫЧНЫЕ ПОЛЬЗОВАТЕЛЬСКИЕ (ID > 7 и < 1000) ===
-        taskIdsSet.filter { it.toIntOrNull() != null && it.toInt() > 7 && it.toInt() < PROGRESSIVE_ID_START }
+        // === ОБЫЧНЫЕ ПОЛЬЗОВАТЕЛЬСКИЕ ===
+        taskIdsSet.filter { it.toIntOrNull()?.let { id -> id > 7 && id < PROGRESSIVE_ID_START } == true }
             .forEach { idStr ->
                 val id = idStr.toInt()
-                val savedTitle = sharedPref.getString("task_${id}_title", "") ?: ""
-                if (savedTitle.isNotEmpty()) {
-                    currentTodos.add(TodoItem(id, savedTitle, false))
-                }
+                val title = sharedPref.getString("task_${id}_title", "") ?: return@forEach
+                currentTodos.add(TodoItem(id, title, false))
             }
 
         // === СПЕЦИАЛЬНЫЕ ===
@@ -111,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         currentTodos.add(TodoItem(SPECIAL_RUN_ID, "Пробежка ${SPECIAL_BASE_RUN + deltaDays} минут", false))
         currentTodos.add(TodoItem(SPECIAL_WORKOUT_ID, "Тренировка ${SPECIAL_BASE_WORKOUT + deltaDays} минут", false))
 
-        // === ПРОГРЕССИРУЮЩИЕ (ID >= 1000) ===
+        // === ПРОГРЕССИРУЮЩИЕ ===
         taskIdsSet.mapNotNull { it.toIntOrNull() }.filter { it >= PROGRESSIVE_ID_START }.forEach { id ->
             val baseValue = sharedPref.getInt("prog_${id}_base", 0)
             val increment = sharedPref.getInt("prog_${id}_inc", 1)
@@ -124,22 +122,22 @@ class MainActivity : AppCompatActivity() {
                 val updatedTitle = template.substring(0, numberPos) +
                         currentValue +
                         template.substring(numberPos + originalNumberStr.length)
-                currentTodos.add(
-                    TodoItem(
-                        id = id,
-                        title = updatedTitle,
-                        isCompleted = false,
-                        isProgressive = true,
-                        baseValue = baseValue,
-                        increment = increment,
-                        numberPosition = numberPos
-                    )
-                )
+
+                currentTodos.add(TodoItem(
+                    id = id,
+                    title = updatedTitle,
+                    isCompleted = false,
+                    isProgressive = true,
+                    baseValue = baseValue,
+                    increment = increment,
+                    numberPosition = numberPos
+                ))
             }
         }
 
         currentTodos.sortBy { it.id }
 
+        // Сброс или загрузка completed
         if (lastResetDate != today) {
             resetCompleted()
             sharedPref.edit().putString("last_reset_date", today).apply()
@@ -170,12 +168,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun toggleTodo(todo: TodoItem, position: Int) {
-        currentTodos[position].isCompleted = !currentTodos[position].isCompleted
-        adapter.notifyItemChanged(position)
-        saveTodos()
-        val message = if (currentTodos[position].isCompleted) "Задача выполнена!" else "Снято!"
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun toggleTodo(todo: TodoItem) {
+        val index = currentTodos.indexOfFirst { it.id == todo.id }
+        if (index != -1) {
+            currentTodos[index].isCompleted = !currentTodos[index].isCompleted
+            adapter.notifyItemChanged(index)
+            saveTodos()
+            val message = if (currentTodos[index].isCompleted) "Задача выполнена!" else "Снято!"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showAddTaskDialog() {
@@ -195,7 +196,10 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             val title = editText.text.toString().trim()
-            if (title.isEmpty()) return@setOnClickListener
+            if (title.isEmpty()) {
+                Toast.makeText(this, "Введите текст!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (rbSimple.isChecked) {
                 val newId = getNextId()
@@ -214,7 +218,14 @@ class MainActivity : AppCompatActivity() {
 
                 showIncrementDialog(title, baseValue, pos) { inc ->
                     val newId = getNextProgressiveId()
-                    currentTodos.add(TodoItem(newId, title, isProgressive = true, baseValue = baseValue, increment = inc, numberPosition = pos))
+                    currentTodos.add(TodoItem(
+                        id = newId,
+                        title = title,
+                        isProgressive = true,
+                        baseValue = baseValue,
+                        increment = inc,
+                        numberPosition = pos
+                    ))
                     currentTodos.sortBy { it.id }
                     adapter.notifyDataSetChanged()
                     saveTodos()
@@ -225,31 +236,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showIncrementDialog(template: String, baseValue: Int, pos: Int, onConfirm: (Int) -> Unit) {
-        val et = EditText(this).apply { setText("1"); inputType = 2 }
+        val et = EditText(this).apply {
+            setText("1")
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER
+        }
         AlertDialog.Builder(this)
             .setTitle("Прогрессия")
-            .setMessage("Число: $baseValue\nШаблон: $template\n\nШаг роста:")
+            .setMessage("Число: $baseValue\nШаг роста:")
             .setView(et)
             .setPositiveButton("OK") { _, _ ->
                 val inc = et.text.toString().toIntOrNull() ?: 1
-                if (inc > 0) onConfirm(inc) else Toast.makeText(this, "Шаг > 0", Toast.LENGTH_SHORT).show()
+                if (inc > 0) onConfirm(inc) else {
+                    Toast.makeText(this, "Шаг > 0", Toast.LENGTH_SHORT).show()
+                    showIncrementDialog(template, baseValue, pos, onConfirm)
+                }
             }
             .setNegativeButton("Отмена", null)
             .show()
     }
 
-    private fun showEditOrDeleteDialog(todo: TodoItem, position: Int) {
+    private fun showEditOrDeleteDialog(todo: TodoItem) {
         AlertDialog.Builder(this)
             .setTitle(todo.title)
             .setItems(arrayOf("Редактировать", "Удалить")) { _, which ->
-                if (which == 0) showEditTaskDialog(todo, position)
-                else confirmAndDelete(todo, position)
+                if (which == 0) showEditTaskDialog(todo)
+                else confirmAndDelete(todo)
             }
             .setNegativeButton("Отмена", null)
             .show()
     }
 
-    private fun showEditTaskDialog(todo: TodoItem, position: Int) {
+    private fun showEditTaskDialog(todo: TodoItem) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_task, null)
         val editText = dialogView.findViewById<EditText>(R.id.etTaskTitle)
         val rbSimple = dialogView.findViewById<RadioButton>(R.id.rbSimple)
@@ -268,12 +285,21 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             val newTitle = editText.text.toString().trim()
-            if (newTitle.isEmpty()) return@setOnClickListener
+            if (newTitle.isEmpty()) {
+                Toast.makeText(this, "Текст не пустой!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val index = currentTodos.indexOfFirst { it.id == todo.id }
+            if (index == -1) {
+                dialog.dismiss()
+                return@setOnClickListener
+            }
 
             if (rbSimple.isChecked) {
-                currentTodos[position] = TodoItem(todo.id, newTitle, todo.isCompleted)
+                currentTodos[index] = TodoItem(todo.id, newTitle, todo.isCompleted)
                 clearProgressiveData(todo.id)
-                adapter.notifyItemChanged(position)
+                adapter.notifyItemChanged(index)
                 saveTodos()
                 dialog.dismiss()
             } else {
@@ -286,7 +312,7 @@ class MainActivity : AppCompatActivity() {
                 val oldInc = todo.increment ?: 1
 
                 showIncrementDialogEdit(newTitle, baseValue, pos, oldInc) { inc ->
-                    currentTodos[position] = TodoItem(
+                    currentTodos[index] = TodoItem(
                         id = todo.id,
                         title = newTitle,
                         isCompleted = todo.isCompleted,
@@ -295,7 +321,7 @@ class MainActivity : AppCompatActivity() {
                         increment = inc,
                         numberPosition = pos
                     )
-                    adapter.notifyItemChanged(position)
+                    adapter.notifyItemChanged(index)
                     saveTodos()
                     dialog.dismiss()
                 }
@@ -304,28 +330,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showIncrementDialogEdit(template: String, baseValue: Int, pos: Int, oldInc: Int, onConfirm: (Int) -> Unit) {
-        val et = EditText(this).apply { setText(oldInc.toString()); inputType = 2 }
+        val et = EditText(this).apply {
+            setText(oldInc.toString())
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER
+        }
         AlertDialog.Builder(this)
             .setTitle("Редактировать шаг")
             .setMessage("Число: $baseValue\nТекущий шаг: $oldInc")
             .setView(et)
             .setPositiveButton("OK") { _, _ ->
                 val inc = et.text.toString().toIntOrNull() ?: 1
-                if (inc > 0) onConfirm(inc) else Toast.makeText(this, "Шаг > 0", Toast.LENGTH_SHORT).show()
+                if (inc > 0) onConfirm(inc) else {
+                    Toast.makeText(this, "Шаг > 0", Toast.LENGTH_SHORT).show()
+                    showIncrementDialogEdit(template, baseValue, pos, oldInc, onConfirm)
+                }
             }
             .setNegativeButton("Отмена", null)
             .show()
     }
 
-    private fun confirmAndDelete(todo: TodoItem, position: Int) {
+    private fun confirmAndDelete(todo: TodoItem) {
         AlertDialog.Builder(this)
             .setTitle("Удалить?")
             .setMessage(todo.title)
             .setPositiveButton("Да") { _, _ ->
-                currentTodos.removeAt(position)
-                adapter.notifyItemRemoved(position)
-                clearTaskData(todo.id, todo.isProgressive)
-                saveTodos()
+                val index = currentTodos.indexOfFirst { it.id == todo.id }
+                if (index != -1) {
+                    currentTodos.removeAt(index)
+                    adapter.notifyItemRemoved(index)
+                    clearTaskData(todo.id, todo.isProgressive)
+                    saveTodos()
+                }
             }
             .setNegativeButton("Нет", null)
             .show()
@@ -354,12 +389,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getNextId(): Int {
-        val ids = sharedPref.getStringSet("task_ids", setOf())?.mapNotNull { it.toIntOrNull() }?.filter { it > 7 && it < PROGRESSIVE_ID_START } ?: emptyList()
+        val ids = sharedPref.getStringSet("task_ids", setOf())?.mapNotNull { it.toIntOrNull() }
+            ?.filter { it > 7 && it < PROGRESSIVE_ID_START } ?: emptyList()
         return (ids.maxOrNull() ?: 7) + 1
     }
 
     private fun getNextProgressiveId(): Int {
-        val ids = sharedPref.getStringSet("task_ids", setOf())?.mapNotNull { it.toIntOrNull() }?.filter { it >= PROGRESSIVE_ID_START } ?: emptyList()
+        val ids = sharedPref.getStringSet("task_ids", setOf())?.mapNotNull { it.toIntOrNull() }
+            ?.filter { it >= PROGRESSIVE_ID_START } ?: emptyList()
         return (ids.maxOrNull() ?: PROGRESSIVE_ID_START - 1) + 1
     }
 

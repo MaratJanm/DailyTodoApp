@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:2:1-25:12
-INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:2:1-25:12
+ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:2:1-25:12
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\30d403a51e87ec07b6f176e8a03d2f36\transformed\material-1.13.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lenovo\.gradle\caches\8.13\transforms\5ff2eb304f1d6d85eadce81f93c8032f\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.1] C:\Users\Lenovo\.gradle\caches\8.13\transforms\9a2055df65214acee1d9548bb7e16187\transformed\appcompat-resources-1.7.1\AndroidManifest.xml:2:1-7:12
@@ -77,18 +77,18 @@ MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Lenovo\.gradle\caches\8.13
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lenovo\.gradle\caches\8.13\transforms\ed8b76acc4ef33b1564340fabbec0560\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\8d7950af77a623c817fda676620d16e8\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
 	package
-		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:3:5-51
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:5:5-23:19
-INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:5:5-23:19
+ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:5:5-23:19
+INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:5:5-23:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\30d403a51e87ec07b6f176e8a03d2f36\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\30d403a51e87ec07b6f176e8a03d2f36\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lenovo\.gradle\caches\8.13\transforms\5ff2eb304f1d6d85eadce81f93c8032f\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -110,47 +110,47 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lenovo\.gradle\cac
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lenovo\.gradle\caches\8.13\transforms\ed8b76acc4ef33b1564340fabbec0560\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lenovo\.gradle\caches\8.13\transforms\ed8b76acc4ef33b1564340fabbec0560\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
-		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.17.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\c623cb5f61337b15ae094874cfdde491\transformed\core-1.17.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:12:9-35
 	android:label
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:10:9-41
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:10:9-41
 	android:fullBackupContent
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:8:9-54
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:8:9-54
 	android:roundIcon
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:11:9-54
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:11:9-54
 	tools:targetApi
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:14:9-29
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:14:9-29
 	android:icon
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:9:9-43
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:9:9-43
 	android:allowBackup
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:6:9-35
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:13:9-50
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:13:9-50
 	android:dataExtractionRules
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:7:9-65
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:7:9-65
 activity#com.example.dailytodoapp.MainActivity
-ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:15:9-22:20
+ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:15:9-22:20
 	android:exported
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:17:13-36
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:17:13-36
 	android:name
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:16:13-41
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:16:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:18:13-21:29
+ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:18:13-21:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:19:17-69
 	android:name
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:19:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:20:17-77
+ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:20:17-77
 	android:name
-		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml:20:27-74
+		ADDED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml:20:27-74
 uses-sdk
-INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\30d403a51e87ec07b6f176e8a03d2f36\transformed\material-1.13.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\30d403a51e87ec07b6f176e8a03d2f36\transformed\material-1.13.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lenovo\.gradle\caches\8.13\transforms\5ff2eb304f1d6d85eadce81f93c8032f\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
@@ -296,9 +296,9 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Le
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\8d7950af77a623c817fda676620d16e8\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\8d7950af77a623c817fda676620d16e8\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 	android:targetSdkVersion
-		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoAppDebug\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Lenovo\Documents\AndroidStudioProjects\DailyTodoApp\app\src\main\AndroidManifest.xml
 activity#androidx.compose.ui.tooling.PreviewActivity
 ADDED from [androidx.compose.ui:ui-tooling-android:1.7.0] C:\Users\Lenovo\.gradle\caches\8.13\transforms\b9208bc3a3841df3b2ed3a8fa9a0a8af\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
 	android:exported
